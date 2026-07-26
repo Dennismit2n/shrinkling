@@ -1,0 +1,24 @@
+# Betriebssystem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editoren
+.vscode/
+.idea/
+*.swp
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build-Output
+dist/
+
+# Lokale Konfiguration & Debug-Dateien
+config.json
+debug_*.json
+
+# Logs & Temporäres
+*.log
+*.tmp

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>shrinkling · Compress &amp; resize images – free, no upload</title>
+  <meta name="description" content="Shrink photos right in your browser — for email, job portals, classifieds. No upload, no server, metadata removed. / Bilder verkleinern im Browser — ohne Upload, kostenlos, Metadaten werden entfernt.">
+  <link rel="canonical" href="https://dennismit2n.github.io/shrinkling/">
+  <meta property="og:title" content="shrinkling — shrink images in your browser">
+  <meta property="og:description" content="Drop photos, pick a size limit, done. 100% local, free, open source.">
+  <meta property="og:url" content="https://dennismit2n.github.io/shrinkling/">
+  <meta property="og:image" content="https://dennismit2n.github.io/shrinkling/assets/promo.png">
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="./css/style.css">
+  <!--
+    Analytics (GoatCounter, cookieless — disclosed in the footer):
+    1. Create a free account at https://www.goatcounter.com
+    2. Uncomment the line below and replace YOURCODE with your site code.
+    <script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  -->
+</head>
+<body>
+<div class="app-shell">
+  <header class="site-header">
+    <div class="brand">
+      <svg class="brand-icon" viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="2" y="2" width="44" height="44" rx="11" fill="var(--accent)"/>
+        <rect x="9" y="17" width="22" height="19" rx="3" fill="none" stroke="#fff" stroke-width="3"/>
+        <circle cx="15.5" cy="23.5" r="2.2" fill="#fff"/>
+        <path d="M11.5 33.5l5.5-6 4 4.2 2.8-3 4.7 4.8z" fill="#fff"/>
+        <path d="M39 9l-8.2 8.2" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M30 11.5v6.5H36.5z" fill="#fff"/>
+      </svg>
+      <div>
+        <h1 data-i18n="appName">shrinkling</h1>
+        <p class="tagline" data-i18n="tagline">Shrink photos right in your browser – for email, applications, classifieds.</p>
+      </div>
+    </div>
+    <label class="lang-wrap">
+      <span class="visually-hidden" data-i18n="langLabel">Language</span>
+      <select id="langSelect" data-i18n-aria="langLabel"></select>
+    </label>
+  </header>
+
+  <main>
+    <section class="panel drop-panel">
+      <div id="dropzone" class="dropzone">
+        <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" class="drop-icon">
+          <path d="M24 6v22m0 0l-8-8m8 8l8-8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 32v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+        </svg>
+        <p class="drop-title" data-i18n="dropTitle">Drop images here</p>
+        <p class="drop-or"><span data-i18n="dropOr">or</span></p>
+        <button type="button" id="btnPick" class="btn primary" data-i18n="dropButton">Choose images</button>
+        <p class="drop-hint" data-i18n="dropHint">JPG, PNG, WebP · several at once · paste with Ctrl+V</p>
+      </div>
+      <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple hidden>
+
+      <p class="privacy-note">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z" fill="currentColor"/></svg>
+        <span><span data-i18n="privacyNote">Your photos never leave your device – everything happens right in your browser.</span>
+        <span data-i18n="exifNote">GPS location &amp; metadata are removed automatically.</span>
+        <span data-i18n="offlineNote">Even works offline.</span></span>
+      </p>
+    </section>
+
+    <section class="panel settings-panel" aria-labelledby="presetsLabel">
+      <h2 id="presetsLabel" class="panel-title" data-i18n="presetsLabel">Target size</h2>
+      <div class="preset-grid" role="group" data-i18n-aria="presetsLabel">
+        <button type="button" class="preset" data-preset="email" aria-pressed="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 2L12 12.6 19.6 7H4.4zM20 8.9l-8 5.7-8-5.7V17h16V8.9z" fill="currentColor"/></svg>
+          <span class="preset-name" data-i18n="presetEmailName">Email</span>
+          <span class="preset-desc" data-i18n="presetEmailDesc">max. 2 MB</span>
+        </button>
+        <button type="button" class="preset" data-preset="apply" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 2h6a2 2 0 0 1 2 2v2h3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2zm0 4h6V4H9v2zm-5 5h16V8H4v3zm0 2v6h16v-6h-5v2H9v-2H4z" fill="currentColor"/></svg>
+          <span class="preset-name" data-i18n="presetApplyName">Application / portal</span>
+          <span class="preset-desc" data-i18n="presetApplyDesc">max. 1 MB</span>
+        </button>
+        <button type="button" class="preset" data-preset="ads" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M21.4 11.6l-9-9A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7c0 .53.21 1.04.59 1.41l9 9a2 2 0 0 0 2.82 0l7-7a2 2 0 0 0 0-2.82zM7 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="currentColor"/></svg>
+          <span class="preset-name" data-i18n="presetAdsName">Classifieds</span>
+          <span class="preset-desc" data-i18n="presetAdsDesc">1920 px · max. 1 MB</span>
+        </button>
+        <button type="button" class="preset" data-preset="web" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm7.93 9h-3.02a15.7 15.7 0 0 0-1.2-5.6A8.03 8.03 0 0 1 19.93 11zM12 4.07c.83 1.2 1.62 3.16 1.9 6.93h-3.8c.28-3.77 1.07-5.73 1.9-6.93zM8.29 5.4A15.7 15.7 0 0 0 7.09 11H4.07a8.03 8.03 0 0 1 4.22-5.6zM4.07 13h3.02c.14 2.08.55 3.99 1.2 5.6A8.03 8.03 0 0 1 4.07 13zM12 19.93c-.83-1.2-1.62-3.16-1.9-6.93h3.8c-.28 3.77-1.07 5.73-1.9 6.93zm3.71-1.33c.65-1.61 1.06-3.52 1.2-5.6h3.02a8.03 8.03 0 0 1-4.22 5.6z" fill="currentColor"/></svg>
+          <span class="preset-name" data-i18n="presetWebName">Web</span>
+          <span class="preset-desc" data-i18n="presetWebDesc">1920 px · WebP</span>
+        </button>
+      </div>
+
+      <details id="customBox" class="custom-box">
+        <summary data-i18n="customTitle">Custom settings</summary>
+        <p class="custom-note" data-i18n="customNote">Changing anything here replaces the selected preset.</p>
+        <div class="custom-grid">
+          <div class="field">
+            <label for="sizeInput" data-i18n="maxSizeLabel">Max. file size</label>
+            <div class="input-row">
+              <input id="sizeInput" type="number" min="10" step="10" inputmode="numeric" data-i18n-ph="sizePlaceholder">
+              <select id="sizeUnit" aria-label="Unit" data-i18n-aria="unitLabel">
+                <option value="kb" data-i18n="unitKB">KB</option>
+                <option value="mb" selected data-i18n="unitMB">MB</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="edgeInput" data-i18n="maxEdgeLabel">Longest edge (pixels)</label>
+            <input id="edgeInput" type="number" min="16" step="10" inputmode="numeric" data-i18n-ph="edgePlaceholder">
+          </div>
+          <div class="field">
+            <label for="formatSelect" data-i18n="formatLabel">Format</label>
+            <select id="formatSelect">
+              <option value="jpeg" selected>JPEG</option>
+              <option value="webp">WebP</option>
+              <option value="png">PNG</option>
+              <option value="original" data-i18n="fmtOriginal">Same as original</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="qualityRange"><span data-i18n="qualityLabel">Quality</span> <output id="qualityOut" for="qualityRange">85 %</output></label>
+            <input id="qualityRange" type="range" min="40" max="95" step="5" value="85">
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="panel results-panel" id="resultsPanel" hidden aria-labelledby="resultsTitle">
+      <div class="results-head">
+        <h2 id="resultsTitle" class="panel-title" data-i18n="resultsTitle">Results</h2>
+        <div class="results-actions">
+          <button type="button" id="btnZip" class="btn primary" hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3v10.6l-3.3-3.3-1.4 1.4L12 17.4l4.7-5.7-1.4-1.4L13 13.6V3h-1zM5 19h14v2H5z" fill="currentColor"/></svg>
+            <span data-i18n="btnZip">Download all (ZIP)</span>
+          </button>
+          <button type="button" id="btnClear" class="btn" data-i18n="btnClear">Clear list</button>
+        </div>
+      </div>
+      <p class="total-line" id="totalLine" aria-live="polite" hidden></p>
+      <ul id="resultList" class="result-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="https://github.com/Dennismit2n/shrinkling" rel="noopener">
+      <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="currentColor"/></svg>
+      <span data-i18n="footerSource">Open source on GitHub</span>
+    </a>
+    <span class="sep">·</span>
+    <span data-i18n="footerTranslate">Some translations are machine-generated – corrections welcome!</span>
+    <span class="sep analytics-note" hidden>·</span>
+    <span class="analytics-note" data-i18n="footerAnalytics" hidden>Anonymous visit counting.</span>
+  </footer>
+</div>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" hidden>
+  <button type="button" id="lightboxClose" class="lightbox-close" data-i18n-aria="lightboxClose">✕</button>
+  <img id="lightboxImg" alt="">
+</div>
+
+<script src="./js/i18n.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>
