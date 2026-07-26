@@ -108,6 +108,7 @@
       items.push(item);
       enqueue(item);
     }
+    updateSummary();
     resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
@@ -145,12 +146,13 @@
     }
   });
 
+  // the toast stays in the DOM permanently (empty when idle): live regions
+  // born display:none are not reliably announced by screen readers
   var toastTimer = null;
   function toast(msg) {
     toastEl.textContent = msg;
-    toastEl.hidden = false;
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { toastEl.hidden = true; }, 3000);
+    toastTimer = setTimeout(function () { toastEl.textContent = ''; }, 3000);
   }
 
   // visible paste path for people who never learned Ctrl+V (context menus
@@ -302,26 +304,33 @@
     updateSummary();
   }
 
+  // error rows have no result blob, so they need their own size renderer
+  function renderErrorSizes(item) {
+    item.row.sizes.innerHTML = '<span>' + formatBytes(item.file.size) + '</span>';
+  }
+
   function showError(item, msgKey) {
     item.status = 'error';
     item.blob = null;
-    item.row.sizes.innerHTML = '<span>' + formatBytes(item.file.size) + '</span>';
+    renderErrorSizes(item);
     setNote(item, 'error', noteSpan(msgKey));
     updateSummary();
   }
 
   function updateSummary() {
     var done = items.filter(function (it) { return it.status === 'done'; });
-    btnZip.hidden = done.length < 2;
-    if (!done.length) { totalLine.hidden = true; return; }
+    // "download ALL" must not appear while part of the batch is still pending
+    var busy = items.some(function (it) { return it.status === 'waiting' || it.status === 'working'; });
+    btnZip.hidden = done.length < 2 || busy;
+    if (!done.length) { totalLine.textContent = ''; return; }
     var from = 0, to = 0;
     for (var i = 0; i < done.length; i++) { from += done[i].file.size; to += done[i].blob.size; }
     var pct = Math.max(0, Math.round((1 - to / from) * 100));
     totalLine.textContent = i18n.fmt('totalLine', { from: formatBytes(from), to: formatBytes(to), pct: pct });
-    totalLine.hidden = false;
   }
 
   btnClear.addEventListener('click', function () {
+    clearTimeout(debounceTimer);
     runToken++;
     for (var i = 0; i < items.length; i++) {
       if (items[i].url) { URL.revokeObjectURL(items[i].url); }
@@ -330,7 +339,7 @@
     resultList.innerHTML = '';
     resultsPanel.hidden = true;
     btnZip.hidden = true;
-    totalLine.hidden = true;
+    totalLine.textContent = '';
   });
 
   /* ---------- processing pipeline ---------- */
@@ -344,6 +353,7 @@
   }
 
   function reprocessAll() {
+    clearTimeout(debounceTimer);
     runToken++;
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
@@ -452,9 +462,12 @@
     }
 
     return decodeFile(item.file).then(function (src) {
-      if (token !== runToken) { return; }
-      return shrink(item, src, settings, token).then(function () {
-        if (src.close) { src.close(); }
+      // release the bitmap on every outcome — stale token, success, or failure
+      function release() { if (src.close) { src.close(); } }
+      if (token !== runToken) { release(); return; }
+      return shrink(item, src, settings, token).then(release, function (err) {
+        release();
+        throw err;
       });
     }).catch(function () {
       if (token !== runToken) { return; }
@@ -471,7 +484,7 @@
 
     var mime = pickFormat(item, settings);
     var wantsJpeg = mime === 'image/jpeg';
-    var mayHaveAlpha = /image\/(png|webp|gif)/.test(item.file.type);
+    var mayHaveAlpha = /image\/(png|webp|gif|svg|avif)/.test(item.file.type);
     var alpha = wantsJpeg && mayHaveAlpha && hasAlpha(src);
 
     var longest = Math.max(size.w, size.h);
@@ -488,9 +501,11 @@
       var hi = settings.quality, lo = MIN_QUALITY;
       return encodeCanvas(canvas, mime, hi).then(function (blob) {
         if (blob.type !== mime) {
-          // encoder unsupported (e.g. WebP in Safari): fall back to JPEG
+          // encoder unsupported (e.g. WebP in Safari): fall back to JPEG —
+          // and re-check alpha, which was skipped while the target was WebP
           mime = 'image/jpeg';
           wantsJpeg = true;
+          alpha = mayHaveAlpha && hasAlpha(src);
           return encodeLossy(canvasAt(scale));
         }
         if (!settings.maxBytes || blob.size <= settings.maxBytes) { return blob; }
@@ -518,7 +533,10 @@
 
     function attempt(round) {
       var canvas = canvasAt(scale);
-      var enc = (mime === 'image/png') ? encodePng(canvas) : encodeLossy(canvas);
+      // toBlob can fail outright on huge canvases (mobile canvas-area limits);
+      // treat that like an over-target result so the dimension loop retries smaller
+      var enc = ((mime === 'image/png') ? encodePng(canvas) : encodeLossy(canvas))
+        .catch(function () { return null; });
       return enc.then(function (blob) {
         if (token !== runToken) { return null; }
         var over = blob === null ||
@@ -531,7 +549,8 @@
         }
         if (blob !== null) { return blob; }
         // even minimum quality at minimum dimensions is over target: best effort
-        return encodeCanvas(canvas, mime, MIN_QUALITY);
+        // (fresh canvas, so a mid-flight format fallback gets its white background)
+        return encodeCanvas(canvasAt(scale), mime, MIN_QUALITY);
       });
     }
 
@@ -558,6 +577,7 @@
           setNote(item, '', null);
           setStatus(item, 'waiting');
           enqueue(item);
+          updateSummary();
         });
         frag.appendChild(b);
         setNote(item, 'warn', frag);
@@ -688,11 +708,13 @@
     var used = {};
     Promise.all(done.map(function (it) {
       return it.blob.arrayBuffer().then(function (buf) {
+        // dedup case-insensitively: the ZIP is usually extracted onto NTFS/APFS
+        var key = it.outName.toLowerCase();
         var name = it.outName;
-        if (used[name]) {
-          name = name.replace(/(\.[^.]+)$/, '-' + used[name] + '$1');
+        if (used[key]) {
+          name = name.replace(/(\.[^.]+)$/, '-' + used[key] + '$1');
         }
-        used[it.outName] = (used[it.outName] || 1) + 1;
+        used[key] = (used[key] || 1) + 1;
         return { name: name, bytes: new Uint8Array(buf) };
       });
     })).then(function (entries) {
@@ -749,6 +771,7 @@
     // number formatting is locale-dependent, so re-render finished rows too
     for (var i = 0; i < items.length; i++) {
       if (items[i].status === 'done') { renderSizes(items[i]); }
+      else if (items[i].status === 'error') { renderErrorSizes(items[i]); }
     }
     updateSummary();
   });

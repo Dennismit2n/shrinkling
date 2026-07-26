@@ -161,6 +161,10 @@ main {
   text-align: center;
 }
 
+/* live regions stay in the DOM when idle — collapse them without display:none */
+.toast:empty,
+.total-line:empty { margin: 0; }
+
 .privacy-note {
   display: flex;
   gap: 0.5rem;

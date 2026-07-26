@@ -18,7 +18,7 @@ Fotos direkt im Browser verkleinern. Bilder hineinziehen, Ziel wählen („E-Mai
 
 ## Datenschutz
 
-Die ganze App besteht aus einer Handvoll statischer Dateien. Es gibt keinen Server, kein CDN, keine Cookies, kein Tracking. Bilder werden lokal per Canvas-API dekodiert, verkleinert und neu kodiert — schalte den Flugmodus ein, es funktioniert trotzdem. Glaub uns nicht einfach: Öffne die DevTools und beobachte den Netzwerk-Tab, oder lies den Quellcode; er liegt komplett hier.
+Die ganze App besteht aus einer Handvoll statischer Dateien. Es gibt keinen Server, kein CDN, keine Cookies, kein Konto. Bilder werden lokal per Canvas-API dekodiert, verkleinert und neu kodiert — schalte den Flugmodus ein, es funktioniert trotzdem. Glaub uns nicht einfach: Öffne die DevTools und beobachte den Netzwerk-Tab, oder lies den Quellcode; er liegt komplett hier.
 
 Weil jedes Bild neu kodiert wird, werden dabei alle EXIF-Metadaten (GPS-Position, Kameramodell, Aufnahmezeit) entfernt — mit Absicht.
 

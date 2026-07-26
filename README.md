@@ -18,7 +18,7 @@ Shrink photos right in your browser. Drop images, pick a target ("email — max.
 
 ## Privacy
 
-The whole app is a handful of static files. There is no server, no CDN, no cookies, no tracking. Images are decoded, resized and re-encoded locally via the Canvas API — turn on airplane mode and it still works. Don't take our word for it: open DevTools and watch the network tab, or read the source; it's all here.
+The whole app is a handful of static files. There is no server, no CDN, no cookies, no accounts. Images are decoded, resized and re-encoded locally via the Canvas API — turn on airplane mode and it still works. Don't take our word for it: open DevTools and watch the network tab, or read the source; it's all here.
 
 Because every image is re-encoded, all EXIF metadata (GPS position, camera model, capture time) is removed as a side effect — by design.
 

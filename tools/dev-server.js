@@ -24,7 +24,8 @@ http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   if (p.endsWith('/')) p += 'index.html';
   const file = path.normalize(path.join(ROOT, p));
-  if (!file.startsWith(ROOT)) { res.writeHead(403); res.end(); return; }
+  // ROOT + separator, or a sibling dir like "shrinkling-foo" would pass the check
+  if (file !== ROOT && !file.startsWith(ROOT + path.sep)) { res.writeHead(403); res.end(); return; }
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404); res.end('not found'); return; }
     res.writeHead(200, {
