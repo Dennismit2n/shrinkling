@@ -16,12 +16,9 @@
   <link rel="icon" href="./icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
   <link rel="stylesheet" href="./css/style.css">
-  <!--
-    Analytics (GoatCounter, cookieless — disclosed in the footer):
-    1. Create a free account at https://www.goatcounter.com
-    2. Uncomment the line below and replace YOURCODE with your site code.
-    <script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  -->
+  <!-- Analytics: GoatCounter (anonymous, cookieless — disclosed in the footer).
+       count.js is vendored locally; the only external request is the count pixel. -->
+  <script data-goatcounter="https://dennis-mit-2n.goatcounter.com/count" async src="./js/vendor/count.js"></script>
 </head>
 <body>
 <div class="app-shell">
@@ -155,8 +152,8 @@
     </a>
     <span class="sep">·</span>
     <span data-i18n="footerTranslate">Some translations are machine-generated – corrections welcome!</span>
-    <span class="sep analytics-note" hidden>·</span>
-    <span class="analytics-note" data-i18n="footerAnalytics" hidden>Anonymous visit counting.</span>
+    <span class="sep analytics-note">·</span>
+    <span class="analytics-note" data-i18n="footerAnalytics">Anonymous visit counting.</span>
   </footer>
 </div>
 

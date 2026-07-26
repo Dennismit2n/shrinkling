@@ -22,7 +22,7 @@ The whole app is a handful of static files. There is no server, no CDN, no cooki
 
 Because every image is re-encoded, all EXIF metadata (GPS position, camera model, capture time) is removed as a side effect — by design.
 
-*Optional analytics:* the app is prepared for [GoatCounter](https://www.goatcounter.com) (anonymous, cookieless visit counting, disclosed in the footer). It is currently **not enabled**.
+*Analytics:* the app uses [GoatCounter](https://www.goatcounter.com) for anonymous, cookieless visit counting (disclosed in the footer). The script is vendored locally in `js/vendor/count.js`; the only external request is the count pixel. No personal data, no cookies, no cross-site tracking — and your images are never involved.
 
 ## Development
 

@@ -22,7 +22,7 @@ Die ganze App besteht aus einer Handvoll statischer Dateien. Es gibt keinen Serv
 
 Weil jedes Bild neu kodiert wird, werden dabei alle EXIF-Metadaten (GPS-Position, Kameramodell, Aufnahmezeit) entfernt — mit Absicht.
 
-*Optionale Analytics:* Die App ist für [GoatCounter](https://www.goatcounter.com) vorbereitet (anonyme Besucherzählung ohne Cookies, im Footer offengelegt). Aktuell ist sie **nicht aktiviert**.
+*Analytics:* Die App nutzt [GoatCounter](https://www.goatcounter.com) für anonyme Besucherzählung ohne Cookies (im Footer offengelegt). Das Skript liegt lokal in `js/vendor/count.js`; die einzige externe Anfrage ist das Zählpixel. Keine persönlichen Daten, keine Cookies, kein seitenübergreifendes Tracking — und deine Bilder sind nie beteiligt.
 
 ## Entwicklung
 

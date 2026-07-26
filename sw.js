@@ -1,13 +1,14 @@
 /* shrinkling service worker — bump CACHE on every deploy so clients update cleanly */
 'use strict';
 
-var CACHE = 'shrinkling-v1';
+var CACHE = 'shrinkling-v2';
 var ASSETS = [
   './',
   './index.html',
   './css/style.css',
   './js/app.js',
   './js/i18n.js',
+  './js/vendor/count.js',
   './manifest.webmanifest',
   './icons/favicon.svg',
   './icons/favicon-32.png',
