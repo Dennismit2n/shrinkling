@@ -18,6 +18,7 @@
 
   var $ = function (id) { return document.getElementById(id); };
   var dropzone = $('dropzone'), fileInput = $('fileInput'), btnPick = $('btnPick'),
+      btnPaste = $('btnPaste'), toastEl = $('toast'),
       presetBtns = document.querySelectorAll('.preset'),
       customBox = $('customBox'), sizeInput = $('sizeInput'), sizeUnit = $('sizeUnit'),
       edgeInput = $('edgeInput'), formatSelect = $('formatSelect'),
@@ -143,6 +144,46 @@
       acceptFiles(e.clipboardData.files);
     }
   });
+
+  var toastTimer = null;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.hidden = true; }, 3000);
+  }
+
+  // visible paste path for people who never learned Ctrl+V (context menus
+  // offer no paste on plain elements) — only where the clipboard API exists
+  if (navigator.clipboard && navigator.clipboard.read) {
+    btnPaste.hidden = false;
+    btnPaste.addEventListener('click', function (e) {
+      e.stopPropagation();
+      navigator.clipboard.read().then(function (clipItems) {
+        var picks = [];
+        var chain = Promise.resolve();
+        clipItems.forEach(function (ci) {
+          var type = null;
+          for (var i = 0; i < ci.types.length; i++) {
+            if (ci.types[i].indexOf('image/') === 0) { type = ci.types[i]; break; }
+          }
+          if (!type) { return; }
+          chain = chain.then(function () {
+            return ci.getType(type).then(function (blob) {
+              var name = 'clipboard-' + (picks.length + 1) + '.' + (EXT[blob.type] || 'png');
+              picks.push(new File([blob], name, { type: blob.type }));
+            });
+          });
+        });
+        return chain.then(function () {
+          if (picks.length) { acceptFiles(picks); }
+          else { toast(i18n.t('errNoClipImage')); }
+        });
+      }).catch(function () {
+        toast(i18n.t('errNoClipImage'));
+      });
+    });
+  }
 
   /* ---------- result rows ---------- */
 

@@ -145,7 +145,21 @@ main {
 
 .drop-or { margin: 0; color: var(--text-soft); font-size: 0.85rem; }
 
+.drop-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
 .drop-hint { margin: 0.55rem 0 0; color: var(--text-soft); font-size: 0.82rem; }
+
+.toast {
+  margin: 0.6rem 0 0;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  text-align: center;
+}
 
 .privacy-note {
   display: flex;

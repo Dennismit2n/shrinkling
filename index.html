@@ -55,10 +55,14 @@
         </svg>
         <p class="drop-title" data-i18n="dropTitle">Drop images here</p>
         <p class="drop-or"><span data-i18n="dropOr">or</span></p>
-        <button type="button" id="btnPick" class="btn primary" data-i18n="dropButton">Choose images</button>
+        <div class="drop-actions">
+          <button type="button" id="btnPick" class="btn primary" data-i18n="dropButton">Choose images</button>
+          <button type="button" id="btnPaste" class="btn" hidden data-i18n="btnPaste">Paste from clipboard</button>
+        </div>
         <p class="drop-hint" data-i18n="dropHint">JPG, PNG, WebP · several at once · paste with Ctrl+V</p>
       </div>
       <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple hidden>
+      <p class="toast" id="toast" role="status" hidden></p>
 
       <p class="privacy-note">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z" fill="currentColor"/></svg>
