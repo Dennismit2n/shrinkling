@@ -34,6 +34,8 @@ node tools/dev-server.js
 
 Then open http://localhost:8614. Edit, reload, done.
 
+**When deploying:** bump the `CACHE` constant in [sw.js](sw.js) so installed clients pick up the new version immediately. (The service worker also refreshes cached assets in the background — stale-while-revalidate — so even a forgotten bump heals itself on the visitor's next visit.)
+
 ## Translations
 
 Interface strings live in [js/i18n.js](js/i18n.js). Some translations are machine-generated — if something sounds off in your language, corrections via pull request or issue are very welcome!

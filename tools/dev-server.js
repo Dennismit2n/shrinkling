@@ -21,7 +21,13 @@ const MIME = {
 };
 
 http.createServer((req, res) => {
-  let p = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+  let p;
+  try {
+    p = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+  } catch (e) {
+    // malformed percent-encoding must not crash the process
+    res.writeHead(400); res.end(); return;
+  }
   if (p.endsWith('/')) p += 'index.html';
   const file = path.normalize(path.join(ROOT, p));
   // ROOT + separator, or a sibling dir like "shrinkling-foo" would pass the check
@@ -34,4 +40,4 @@ http.createServer((req, res) => {
     });
     res.end(data);
   });
-}).listen(PORT, () => console.log(`shrinkling dev server: http://localhost:${PORT}`));
+}).listen(PORT, '127.0.0.1', () => console.log(`shrinkling dev server: http://localhost:${PORT}`));

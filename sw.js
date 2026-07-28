@@ -1,7 +1,7 @@
 /* shrinkling service worker — bump CACHE on every deploy so clients update cleanly */
 'use strict';
 
-var CACHE = 'shrinkling-v3';
+var CACHE = 'shrinkling-v4';
 var ASSETS = [
   './',
   './index.html',
@@ -49,17 +49,22 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  // assets: cache first, fill cache from network on miss (same-origin only)
+  // assets: stale-while-revalidate — serve the cache instantly, refresh it in the
+  // background so a deploy without a CACHE bump still reaches clients on their next visit
   event.respondWith(
     caches.match(req).then(function (hit) {
-      if (hit) { return hit; }
-      return fetch(req).then(function (res) {
+      var fetched = fetch(req).then(function (res) {
         if (res.ok && new URL(req.url).origin === self.location.origin) {
           var copy = res.clone();
           caches.open(CACHE).then(function (cache) { cache.put(req, copy); });
         }
         return res;
       });
+      if (hit) {
+        event.waitUntil(fetched.catch(function () { /* offline: keep the cached copy */ }));
+        return hit;
+      }
+      return fetched;
     })
   );
 });
