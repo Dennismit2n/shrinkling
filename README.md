@@ -12,7 +12,7 @@ Shrink photos right in your browser. Drop images, pick a target ("email — max.
 - 📦 **Batch** — drop many photos at once, download them all as a ZIP
 - 🕵️ **Metadata removed** — GPS location, camera model and timestamps are stripped automatically
 - 🖼️ **JPEG, PNG, WebP** — smart target-size search; transparency warning before it would be lost (HEIC works in Safari; other browsers show a friendly hint)
-- 🌍 **9 languages** — Deutsch, English, Español, Français, Italiano, Türkçe, हिन्दी, 中文, 日本語 (auto-detected)
+- 🌍 **12 languages** — Deutsch, English, Español, Français, Italiano, Português, Türkçe, Русский, हिन्दी, 中文, 日本語, 한국어 (auto-detected)
 - 📱 **Installable PWA** — add it to your home screen; works fully offline
 - 🔒 **Radically private** — everything happens in your browser
 
