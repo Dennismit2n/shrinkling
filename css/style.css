@@ -1,6 +1,7 @@
 /* shrinkling — mobile-first, light/dark via prefers-color-scheme */
 
 :root {
+  color-scheme: light;
   --accent: #7c3aed;
   --accent-strong: #6d28d9;
   --accent-soft: #ede9fe;
@@ -15,8 +16,12 @@
   --shadow: 0 10px 30px rgba(30, 27, 46, 0.10);
 }
 
+/* Dark theme comes in two doors with identical furniture:
+   1) system preference (unless the user forced light),
+   2) the theme dropdown forcing dark. Keep both in sync! */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --accent: #a78bfa;
     --accent-strong: #c4b5fd;
     --accent-soft: #2e1065;
@@ -30,6 +35,22 @@
     --ok: #4ade80;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --accent: #a78bfa;
+  --accent-strong: #c4b5fd;
+  --accent-soft: #2e1065;
+  --bg: #120f1e;
+  --panel: #1a1628;
+  --text: #e8e5f4;
+  --text-soft: #a49dbd;
+  --border: #2b2440;
+  --error: #f87171;
+  --warn: #fbbf24;
+  --ok: #4ade80;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 * { box-sizing: border-box; }
@@ -84,6 +105,8 @@ body {
 .brand h1 { margin: 0; font-size: 1.35rem; line-height: 1.2; }
 
 .tagline { margin: 0.15rem 0 0; color: var(--text-soft); font-size: 0.92rem; }
+
+.header-controls { display: flex; align-items: center; gap: 0.5rem; }
 
 .lang-wrap select {
   background: var(--panel);
@@ -306,8 +329,9 @@ main {
 .btn.primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
 
 @media (prefers-color-scheme: dark) {
-  .btn.primary { color: #1a1628; }
+  :root:not([data-theme="light"]) .btn.primary { color: #1a1628; }
 }
+:root[data-theme="dark"] .btn.primary { color: #1a1628; }
 
 .btn:disabled { opacity: 0.5; cursor: default; }
 

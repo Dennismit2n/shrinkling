@@ -750,6 +750,41 @@
     if (e.key === 'Tab') { e.preventDefault(); lightboxClose.focus(); }
   });
 
+  /* ---------- theme: system / light / dark ---------- */
+  /* The head snippet already applied a stored choice before first
+     paint; here we just build the dropdown and wire it up. */
+
+  (function () {
+    var THEME_KEY = 'shrinkling.theme';
+    var themeSelect = document.getElementById('themeSelect');
+    var themeOptions = [
+      { value: 'system', i18n: 'themeSystem' },
+      { value: 'light', i18n: 'themeLight' },
+      { value: 'dark', i18n: 'themeDark' }
+    ];
+    for (var i = 0; i < themeOptions.length; i++) {
+      var opt = document.createElement('option');
+      opt.value = themeOptions[i].value;
+      opt.setAttribute('data-i18n', themeOptions[i].i18n);
+      themeSelect.appendChild(opt);
+    }
+    var stored = 'system';
+    try {
+      var saved = localStorage.getItem(THEME_KEY);
+      if (saved === 'light' || saved === 'dark') { stored = saved; }
+    } catch (e) { /* ignore */ }
+    themeSelect.value = stored;
+    themeSelect.addEventListener('change', function () {
+      var v = themeSelect.value;
+      if (v === 'light' || v === 'dark') {
+        document.documentElement.setAttribute('data-theme', v);
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      try { localStorage.setItem(THEME_KEY, v); } catch (e) { /* ignore */ }
+    });
+  })();
+
   /* ---------- language ---------- */
 
   (function () {

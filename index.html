@@ -18,6 +18,8 @@
   <link rel="icon" href="./icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
   <link rel="stylesheet" href="./css/style.css">
+  <!-- Theme before first paint: stored choice wins, otherwise system decides via CSS. -->
+  <script>try{var t=localStorage.getItem('shrinkling.theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
   <!-- Analytics: GoatCounter (anonymous, cookieless — disclosed in the footer).
        count.js is vendored locally; the only external request is the count pixel. -->
   <script data-goatcounter="https://dennis-mit-2n.goatcounter.com/count" async src="./js/vendor/count.js"></script>
@@ -39,10 +41,16 @@
         <p class="tagline" data-i18n="tagline">Shrink photos right in your browser – for email, applications, classifieds.</p>
       </div>
     </div>
-    <label class="lang-wrap">
-      <span class="visually-hidden" data-i18n="langLabel">Language</span>
-      <select id="langSelect" data-i18n-aria="langLabel"></select>
-    </label>
+    <div class="header-controls">
+      <label class="lang-wrap">
+        <span class="visually-hidden" data-i18n="themeLabel">Appearance</span>
+        <select id="themeSelect" data-i18n-aria="themeLabel"></select>
+      </label>
+      <label class="lang-wrap">
+        <span class="visually-hidden" data-i18n="langLabel">Language</span>
+        <select id="langSelect" data-i18n-aria="langLabel"></select>
+      </label>
+    </div>
   </header>
 
   <main>
