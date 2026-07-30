@@ -46,4 +46,4 @@ Die Oberflächentexte liegen in [js/i18n.js](js/i18n.js). Einige Übersetzungen 
 
 ## Lizenz
 
-[MIT](LICENSE)
+[MIT](LICENSE) für alles in diesem Repository, mit einer Ausnahme: `js/vendor/count.js` ist das Zählskript von GoatCounter und steht unter der ISC-Lizenz, wie im Kopf der Datei angegeben.

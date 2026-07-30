@@ -46,4 +46,4 @@ Interface strings live in [js/i18n.js](js/i18n.js). Some translations are machin
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) for everything in this repository, with one exception: `js/vendor/count.js` is GoatCounter's counter script and is released under the ISC license, as stated in its file header.
