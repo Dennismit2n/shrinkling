@@ -303,7 +303,7 @@ am selben Tag.
 >
 > MIT-Lizenz. Über Rückmeldungen freue ich mich, besonders wenn ein Bild durchfällt oder eine Übersetzung schief ist.
 
-(2 195 Zeichen)
+(2 191 Zeichen)
 
 ---
 
