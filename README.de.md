@@ -12,7 +12,7 @@ Fotos direkt im Browser verkleinern. Bilder hineinziehen, Ziel wählen („E-Mai
 - 📦 **Stapelverarbeitung** — viele Fotos auf einmal hineinziehen, alle zusammen als ZIP herunterladen
 - 🕵️ **Metadaten entfernt** — GPS-Standort, Kameramodell und Aufnahmezeit werden automatisch gelöscht
 - 🖼️ **JPEG, PNG, WebP** — intelligente Zielgrößen-Suche; Warnung, bevor Transparenz verloren ginge (HEIC funktioniert in Safari; andere Browser zeigen einen freundlichen Hinweis)
-- 🌍 **12 Sprachen** — Deutsch, English, Español, Français, Italiano, Português, Türkçe, Русский, हिन्दी, 中文, 日本語, 한국어 (automatisch erkannt)
+- 🌍 **14 Sprachen** — Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Português, Türkçe, Русский, हिन्दी, 中文, 日本語, 한국어 (automatisch erkannt)
 - 📱 **Installierbare PWA** — zum Startbildschirm hinzufügen; funktioniert komplett offline
 - 🔒 **Radikal privat** — alles passiert in deinem Browser
 
