@@ -6,6 +6,8 @@
 
 Shrink photos right in your browser. Drop images, pick a target ("email — max. 2 MB", "job portal — max. 1 MB", …), download the shrunk files. No upload, no server, no account — your photos never leave your device.
 
+<img src="assets/screenshot-de.webp" alt="shrinkling: the area for dropping, choosing or pasting images, and below it the four target sizes for email, job portals, classifieds and the web." width="640">
+
 ## Features
 
 - 🎯 **One-click presets** — email (2 MB), application portals (1 MB), classifieds (1920 px), web (WebP) — plus free custom limits in KB/MB, pixels, format and quality

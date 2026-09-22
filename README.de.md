@@ -6,6 +6,8 @@
 
 Fotos direkt im Browser verkleinern. Bilder hineinziehen, Ziel wählen („E-Mail — max. 2 MB", „Bewerbungsportal — max. 1 MB", …), fertige Dateien herunterladen. Kein Upload, kein Server, kein Konto — deine Fotos verlassen nie dein Gerät.
 
+<img src="assets/screenshot-de.webp" alt="shrinkling: die Fläche zum Hineinziehen, Auswählen oder Einfügen von Bildern, darunter die vier Zielgrößen für E-Mail, Bewerbungsportale, Kleinanzeigen und das Web." width="640">
+
 ## Funktionen
 
 - 🎯 **Ein-Klick-Presets** — E-Mail (2 MB), Bewerbungsportale (1 MB), Kleinanzeigen (1920 px), Web (WebP) — plus freie Einstellungen für KB/MB, Pixel, Format und Qualität
