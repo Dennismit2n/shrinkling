@@ -1,7 +1,7 @@
 /* shrinkling service worker — bump CACHE on every deploy so clients update cleanly */
 'use strict';
 
-var CACHE = 'shrinkling-v8';
+var CACHE = 'shrinkling-v9';
 var ASSETS = [
   './',
   './index.html',
@@ -29,7 +29,9 @@ self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then(function (keys) {
       return Promise.all(keys.map(function (key) {
-        if (key !== CACHE) { return caches.delete(key); }
+        // Only our own old caches: every tool lives on dennismit2n.github.io and shares
+        // the same Cache Storage, so a foreign name belongs to a sibling app.
+        if (key !== CACHE && key.indexOf('shrinkling-') === 0) { return caches.delete(key); }
       }));
     }).then(function () { return self.clients.claim(); })
   );

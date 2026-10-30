@@ -8,6 +8,8 @@
 var I18N = {
   de: {
     _name: 'Deutsch',
+    installBtn: 'Installieren',
+    installDone: 'Als App installiert.',
     appName: 'shrinkling',
     docTitle: 'Bilder verkleinern – kostenlos & ohne Upload',
     tagline: 'Fotos direkt im Browser verkleinern – für E-Mail, Bewerbung, Kleinanzeigen.',
@@ -69,6 +71,8 @@ var I18N = {
   },
   en: {
     _name: 'English',
+    installBtn: 'Install',
+    installDone: 'Installed as an app.',
     appName: 'shrinkling',
     docTitle: 'Compress & resize images – free, no upload',
     tagline: 'Shrink photos right in your browser – for email, applications, classifieds.',
@@ -130,6 +134,8 @@ var I18N = {
   },
   es: {
     _name: 'Español',
+    installBtn: 'Instalar',
+    installDone: 'Instalación completada.',
     appName: 'shrinkling',
     docTitle: 'Reducir imágenes – gratis y sin subirlas',
     tagline: 'Reduce fotos directamente en tu navegador: para correo, solicitudes y anuncios.',
@@ -191,6 +197,8 @@ var I18N = {
   },
   fr: {
     _name: 'Français',
+    installBtn: 'Installer',
+    installDone: 'Installation terminée.',
     appName: 'shrinkling',
     docTitle: 'Réduire des images – gratuit, sans envoi',
     tagline: 'Réduisez vos photos directement dans le navigateur : e-mail, candidatures, petites annonces.',
@@ -252,6 +260,8 @@ var I18N = {
   },
   it: {
     _name: 'Italiano',
+    installBtn: 'Installa',
+    installDone: 'Installazione completata.',
     appName: 'shrinkling',
     docTitle: 'Ridurre immagini – gratis e senza upload',
     tagline: 'Riduci le foto direttamente nel browser: per e-mail, candidature, annunci.',
@@ -313,6 +323,8 @@ var I18N = {
   },
   nl: {
     _name: 'Nederlands',
+    installBtn: 'Installeren',
+    installDone: 'Als app geïnstalleerd.',
     appName: 'shrinkling',
     docTitle: 'Afbeeldingen verkleinen – gratis en zonder uploaden',
     tagline: 'Foto’s direct in je browser verkleinen – voor e-mail, sollicitatie, advertenties.',
@@ -374,6 +386,8 @@ var I18N = {
   },
   pl: {
     _name: 'Polski',
+    installBtn: 'Zainstaluj',
+    installDone: 'Zainstalowano jako aplikację.',
     appName: 'shrinkling',
     docTitle: 'Zmniejszanie zdjęć – za darmo i bez wysyłania na serwer',
     tagline: 'Zmniejszaj zdjęcia bezpośrednio w przeglądarce – do e-maila, CV, ogłoszeń.',
@@ -435,6 +449,8 @@ var I18N = {
   },
   pt: {
     _name: 'Português',
+    installBtn: 'Instalar',
+    installDone: 'Instalação concluída.',
     appName: 'shrinkling',
     docTitle: 'Reduzir imagens — grátis e sem upload',
     tagline: 'Reduza fotos direto no navegador — para e-mail, candidaturas e classificados.',
@@ -496,6 +512,8 @@ var I18N = {
   },
   tr: {
     _name: 'Türkçe',
+    installBtn: 'Yükle',
+    installDone: 'Uygulama olarak yüklendi.',
     appName: 'shrinkling',
     docTitle: 'Görselleri küçült – ücretsiz, yüklemesiz',
     tagline: 'Fotoğrafları doğrudan tarayıcıda küçült: e-posta, başvuru ve ilanlar için.',
@@ -557,6 +575,8 @@ var I18N = {
   },
   ru: {
     _name: 'Русский',
+    installBtn: 'Установить',
+    installDone: 'Установлено как приложение.',
     appName: 'shrinkling',
     docTitle: 'Уменьшение изображений — бесплатно и без загрузки на сервер',
     tagline: 'Уменьшайте фото прямо в браузере — для почты, анкет и объявлений.',
@@ -618,6 +638,8 @@ var I18N = {
   },
   hi: {
     _name: 'हिन्दी',
+    installBtn: 'इंस्टॉल करें',
+    installDone: 'ऐप के रूप में इंस्टॉल हो गया।',
     appName: 'shrinkling',
     docTitle: 'फ़ोटो का साइज़ घटाएँ – मुफ़्त, बिना अपलोड',
     tagline: 'फ़ोटो सीधे ब्राउज़र में छोटी करें – ईमेल, आवेदन और सामान बेचने के लिए।',
@@ -679,6 +701,8 @@ var I18N = {
   },
   zh: {
     _name: '中文',
+    installBtn: '安装',
+    installDone: '已作为应用安装。',
     appName: 'shrinkling',
     docTitle: '图片压缩 – 免费、无需上传',
     tagline: '直接在浏览器中缩小照片 – 用于邮件、求职申请、二手交易。',
@@ -740,6 +764,8 @@ var I18N = {
   },
   ja: {
     _name: '日本語',
+    installBtn: 'インストール',
+    installDone: 'アプリとしてインストールしました。',
     appName: 'shrinkling',
     docTitle: '画像を縮小 – 無料・アップロード不要',
     tagline: 'ブラウザだけで写真を縮小 – メール・応募・フリマ用に。',
@@ -801,6 +827,8 @@ var I18N = {
   },
   ko: {
     _name: '한국어',
+    installBtn: '설치',
+    installDone: '앱으로 설치되었습니다.',
     appName: 'shrinkling',
     docTitle: '이미지 용량 줄이기 — 무료, 업로드 없음',
     tagline: '브라우저에서 바로 사진 용량 줄이기 — 메일, 지원서, 중고 거래용.',
