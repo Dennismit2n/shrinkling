@@ -12,7 +12,7 @@
   --border: #e5e1f0;
   --error: #dc2626;
   --warn: #b45309;
-  --ok: #15803d;
+  --ok: #007433;           /* 4,56 auf seiner eigenen Tönung im Ersparnis-Schild (vorher #15803d: 3,91) */
   --shadow: 0 10px 30px rgba(30, 27, 46, 0.10);
 }
 
@@ -440,7 +440,7 @@ main {
   font-weight: 700;
   font-size: 0.78rem;
   color: var(--ok);
-  background: rgba(21, 128, 61, 0.12); /* fallback for browsers without color-mix() */
+  background: rgba(0, 116, 51, 0.12); /* fallback for browsers without color-mix() */
   background: color-mix(in srgb, var(--ok) 12%, transparent);
   border-radius: 0.4rem;
   padding: 0.05rem 0.4rem;
