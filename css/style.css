@@ -548,3 +548,90 @@ main {
 .site-footer a:hover { color: var(--accent); }
 
 .sep { opacity: 0.6; }
+
+/* ---------- Sehhilfen: Hoher Kontrast, Farbenblind, Umgekehrte Farben ----------
+   (31.10.2026) Eine Wahl für die ganze Werkstatt: localStorage
+   „werkstatt.darstellung“, alle Werkzeuge liegen auf einem Ursprung. Das
+   Kopf-Skript setzt data-theme (light/dark, wie bisher) und data-vision
+   (contrast, cvd, invert). Die beiden Farbblöcke oben bleiben, wie sie sind. */
+
+/* Hoher Kontrast dunkel: Schwarz, Schrift #E0E0E0 (15,91:1), jede Farbe 7:1.
+   Akzent und die drei Meldefarben halten das im Dunkeln schon. */
+:root[data-vision="contrast"][data-theme="dark"] {
+  --accent-soft: #241552;  /* gewählte Vorlage, Schrift darauf 13:1 */
+  --bg: #000000;
+  --panel: #000000;
+  --text: #E0E0E0;
+  --text-soft: #C4C4C4;    /* 12,04 */
+  --border: #A0A0A0;       /* 8,03 */
+  --shadow: none;
+}
+
+/* Hoher Kontrast hell: Weiß, Schrift Schwarz, gleiche Farbtöne nachgedunkelt */
+:root[data-vision="contrast"][data-theme="light"] {
+  --accent: #6407CD;       /* 7,21 auf --accent-soft, 8,4 auf Weiß */
+  --accent-strong: #6C26D8;
+  --bg: #FFFFFF;
+  --panel: #FFFFFF;
+  --text: #000000;
+  --text-soft: #2B2B2B;    /* 14,16 */
+  --border: #585757;       /* 7,20 */
+  --error: #B2000F;        /* 7,24 */
+  --warn: #903F00;         /* 7,25 */
+  --ok: #005625;           /* 7,29 auf seiner eigenen Tönung im Ersparnis-Schild */
+  --shadow: none;
+}
+/* Dunkle Knopfschrift auf Lila hielt nur 6,49:1, Schwarz hält 7,72 */
+:root[data-vision="contrast"][data-theme="dark"] .btn.primary { color: #000000; }
+
+:root[data-vision="contrast"] :is(.panel, .btn, .result-row, .result-thumb, .lang-wrap select, .install-btn, select, input) { border-width: 2px; }
+/* Die gewählte Vorlage zeigt mehr als nur eine andere Rahmenfarbe */
+:root[data-vision="contrast"] .preset[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--accent); }
+:root[data-vision="contrast"] :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+/* Am Handy teilen sich Darstellung und Sprache eine Zeile. Ein Auswahlfeld ist
+   so breit wie sein längster Eintrag, und das ist seit den acht Darstellungen
+   „Hoher Kontrast dunkel“ (ru „Для дальтоников, светлая“). Ohne diese Regel
+   rutschten die Felder bei 320 px in zwei Zeilen; die Darstellung bekommt den
+   größeren Teil, ein zu langer Eintrag wird im Feld gekappt. */
+@media (max-width: 560px) {
+  .header-controls .lang-wrap { flex: 1 1 0; min-width: 0; }
+  .header-controls .lang-wrap:has(#themeSelect) { flex-grow: 1.6; }
+  .header-controls .lang-wrap select { width: 100%; min-width: 0; }
+}
+:root[data-vision="contrast"] .site-footer a { text-decoration: underline; }
+:root[data-vision="contrast"] .sep { opacity: 1; }
+
+/* Farbenblind: Okabe-Ito statt Grün/Gelb/Rot. Gespart heißt Blau, Hinweis
+   Ocker bzw. Gelb, Fehler Zinnober, im Hellen zusätzlich dunkler als der
+   Hinweis, damit beide auch über die Helligkeit auseinanderzuhalten sind.
+   Jede Meldung steht ohnehin als Text da. */
+:root[data-vision="cvd"][data-theme="light"] {
+  --ok: #0067A2;     /* 4,65 auf der eigenen Tönung im Ersparnis-Schild */
+  --warn: #956500;   /* 4,63 */
+  --error: #974100;  /* 6,23 */
+}
+:root[data-vision="cvd"][data-theme="dark"] {
+  --ok: #56B4E9;     /* 7,65 */
+  --warn: #F0E442;   /* 13,35 */
+  --error: #E8743A;  /* 5,88 */
+}
+
+/* Umgekehrte Farben wie der Farbfilter von Windows. Deine Bilder (Vorschau,
+   Großansicht) werden ein zweites Mal umgedreht und bleiben so echt. */
+:root[data-vision="invert"] { filter: invert(1); }
+:root[data-vision="invert"] :is(img:not([src*=".svg"]), video, [data-echt]):not([data-echt] *) { filter: invert(1); }
+:root[data-vision="invert"] .sep { opacity: 1; }
+/* Umdrehen erhält den WCAG-Kontrast nicht. Im Dunkeln kämen Akzent, Fehler
+   und das Ersparnis-Schild umgedreht auf 4,33, 3,22 und 4,31; leicht
+   angehoben halten sie 4,6. */
+@media (prefers-color-scheme: dark) {
+  :root[data-vision="invert"] {
+    --accent: #AB90FF;
+    --error: #FF8D8A;
+    --ok: #50E385;
+  }
+}
+@media print {
+  :root[data-vision="invert"],
+  :root[data-vision="invert"] :is(img:not([src*=".svg"]), video, [data-echt]):not([data-echt] *) { filter: none; }
+}

@@ -750,17 +750,29 @@
     if (e.key === 'Tab') { e.preventDefault(); lightboxClose.focus(); }
   });
 
-  /* ---------- theme: system / light / dark ---------- */
+  /* ---------- theme: system, light, dark and the three aids ---------- */
   /* The head snippet already applied a stored choice before first
-     paint; here we just build the dropdown and wire it up. */
+     paint; here we build the dropdown, wire it up and follow the system.
+     One choice for the whole workshop (31.10.2026): every tool lives on
+     the same origin and reads werkstatt.darstellung; the old key of this
+     tool is only read as a fallback. data-theme carries light/dark,
+     data-vision high contrast (contrast), colour-blind (cvd) and inverted
+     colours (invert). Keep the resolving in step with the head snippet. */
 
   (function () {
-    var THEME_KEY = 'shrinkling.theme';
+    var THEME_KEY = 'werkstatt.darstellung';
+    var OLD_THEME_KEY = 'shrinkling.theme';
+    var THEMES = ['system', 'light', 'dark', 'hc-dark', 'hc-light', 'cvd-dark', 'cvd-light', 'invert'];
     var themeSelect = document.getElementById('themeSelect');
     var themeOptions = [
       { value: 'system', i18n: 'themeSystem' },
       { value: 'light', i18n: 'themeLight' },
-      { value: 'dark', i18n: 'themeDark' }
+      { value: 'dark', i18n: 'themeDark' },
+      { value: 'hc-dark', i18n: 'themeHcDark' },
+      { value: 'hc-light', i18n: 'themeHcLight' },
+      { value: 'cvd-dark', i18n: 'themeCvdDark' },
+      { value: 'cvd-light', i18n: 'themeCvdLight' },
+      { value: 'invert', i18n: 'themeInvert' }
     ];
     for (var i = 0; i < themeOptions.length; i++) {
       var opt = document.createElement('option');
@@ -768,21 +780,52 @@
       opt.setAttribute('data-i18n', themeOptions[i].i18n);
       themeSelect.appendChild(opt);
     }
-    var stored = 'system';
-    try {
-      var saved = localStorage.getItem(THEME_KEY);
-      if (saved === 'light' || saved === 'dark') { stored = saved; }
-    } catch (e) { /* ignore */ }
-    themeSelect.value = stored;
-    themeSelect.addEventListener('change', function () {
-      var v = themeSelect.value;
-      if (v === 'light' || v === 'dark') {
-        document.documentElement.setAttribute('data-theme', v);
-      } else {
-        document.documentElement.removeAttribute('data-theme');
+
+    // Values of other tools this one does not know count as their family
+    function stored() {
+      var v = null;
+      try { v = localStorage.getItem(THEME_KEY) || localStorage.getItem(OLD_THEME_KEY); } catch (e) { /* ignore */ }
+      if (THEMES.indexOf(v) >= 0) { return v; }
+      if (/dark/.test(v || '')) { return 'dark'; }
+      if (/light/.test(v || '')) { return 'light'; }
+      return 'system';
+    }
+    function media(q) { return !!(window.matchMedia && window.matchMedia(q).matches); }
+    function apply(v) {
+      var theme = null;
+      var vision = null;
+      if (v === 'light' || v === 'dark') { theme = v; }
+      else if (v === 'hc-dark' || v === 'hc-light') { theme = v.slice(3); vision = 'contrast'; }
+      else if (v === 'cvd-dark' || v === 'cvd-light') { theme = v.slice(4); vision = 'cvd'; }
+      else if (v === 'invert') { vision = 'invert'; }
+      else if (media('(prefers-contrast: more)')) {
+        theme = media('(prefers-color-scheme: dark)') ? 'dark' : 'light';
+        vision = 'contrast';
       }
-      try { localStorage.setItem(THEME_KEY, v); } catch (e) { /* ignore */ }
+      var root = document.documentElement;
+      if (theme) { root.setAttribute('data-theme', theme); } else { root.removeAttribute('data-theme'); }
+      if (vision) { root.setAttribute('data-vision', vision); } else { root.removeAttribute('data-vision'); }
+    }
+
+    themeSelect.value = stored();
+    themeSelect.addEventListener('change', function () {
+      apply(themeSelect.value);
+      try { localStorage.setItem(THEME_KEY, themeSelect.value); } catch (e) { /* ignore */ }
     });
+
+    // "System" follows the device live, also for "increase contrast"
+    if (window.matchMedia) {
+      var follow = function () { if (stored() === 'system') { apply('system'); } };
+      ['(prefers-color-scheme: dark)', '(prefers-contrast: more)'].forEach(function (q) {
+        var list = window.matchMedia(q);
+        if (list.addEventListener) { list.addEventListener('change', follow); }
+        else if (list.addListener) { list.addListener(follow); }
+      });
+    }
+    // A choice made in another tool's tab, or before coming back here
+    function again() { var v = stored(); apply(v); themeSelect.value = v; }
+    window.addEventListener('storage', function (e) { if (e.key === THEME_KEY) { again(); } });
+    window.addEventListener('pageshow', function (e) { if (e.persisted) { again(); } });
   })();
 
   /* ---------- language ---------- */

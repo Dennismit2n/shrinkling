@@ -27,8 +27,10 @@
   <link rel="icon" href="./icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
   <link rel="stylesheet" href="./css/style.css">
-  <!-- Theme before first paint: stored choice wins, otherwise system decides via CSS. -->
-  <script>try{var t=localStorage.getItem('shrinkling.theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+  <!-- Darstellung vor dem ersten Bild: die gemeinsame Wahl aller Werkzeuge (werkstatt.darstellung,
+       sonst der alte Schlüssel), sonst entscheidet das System per CSS. data-vision trägt Hoher
+       Kontrast, Farbenblind und Umkehr; dieselbe Auflösung steht in js/app.js (Abschnitt theme). -->
+  <script>(function(){var v=null,r=document.documentElement,m=window.matchMedia,t=null,s=null;try{v=localStorage.getItem('werkstatt.darstellung')||localStorage.getItem('shrinkling.theme');}catch(e){}var d=!!(m&&m('(prefers-color-scheme: dark)').matches),k=!!(m&&m('(prefers-contrast: more)').matches);if(v==='light'||v==='dark'){t=v;}else if(v==='hc-dark'||v==='hc-light'){t=v.slice(3);s='contrast';}else if(v==='cvd-dark'||v==='cvd-light'){t=v.slice(4);s='cvd';}else if(v==='invert'){s='invert';}else if(v&&/dark/.test(v)){t='dark';}else if(v&&/light/.test(v)){t='light';}else if(k){t=d?'dark':'light';s='contrast';}if(t){r.setAttribute('data-theme',t);}if(s){r.setAttribute('data-vision',s);}})();</script>
   <!-- Analytics: GoatCounter (anonymous, cookieless — disclosed in the footer).
        count.js is vendored locally; the only external request is the count pixel. -->
   <script data-goatcounter="https://dennis-mit-2n.goatcounter.com/count" async src="./js/vendor/count.js"></script>

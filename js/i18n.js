@@ -67,7 +67,12 @@ var I18N = {
     themeLabel: 'Darstellung',
     themeSystem: 'System',
     themeLight: 'Hell',
-    themeDark: 'Dunkel'
+    themeDark: 'Dunkel',
+    themeHcDark: 'Hoher Kontrast dunkel',
+    themeHcLight: 'Hoher Kontrast hell',
+    themeCvdDark: 'Farbenblind dunkel',
+    themeCvdLight: 'Farbenblind hell',
+    themeInvert: 'Umgekehrte Farben',
   },
   en: {
     _name: 'English',
@@ -130,7 +135,12 @@ var I18N = {
     themeLabel: 'Appearance',
     themeSystem: 'System',
     themeLight: 'Light',
-    themeDark: 'Dark'
+    themeDark: 'Dark',
+    themeHcDark: 'High contrast dark',
+    themeHcLight: 'High contrast light',
+    themeCvdDark: 'Colour-blind dark',
+    themeCvdLight: 'Colour-blind light',
+    themeInvert: 'Inverted colours',
   },
   es: {
     _name: 'Español',
@@ -193,7 +203,12 @@ var I18N = {
     themeLabel: 'Apariencia',
     themeSystem: 'Sistema',
     themeLight: 'Claro',
-    themeDark: 'Oscuro'
+    themeDark: 'Oscuro',
+    themeHcDark: 'Alto contraste oscuro',
+    themeHcLight: 'Alto contraste claro',
+    themeCvdDark: 'Daltónico oscuro',
+    themeCvdLight: 'Daltónico claro',
+    themeInvert: 'Colores invertidos',
   },
   fr: {
     _name: 'Français',
@@ -256,7 +271,12 @@ var I18N = {
     themeLabel: 'Apparence',
     themeSystem: 'Système',
     themeLight: 'Clair',
-    themeDark: 'Sombre'
+    themeDark: 'Sombre',
+    themeHcDark: 'Contraste élevé sombre',
+    themeHcLight: 'Contraste élevé clair',
+    themeCvdDark: 'Daltonien sombre',
+    themeCvdLight: 'Daltonien clair',
+    themeInvert: 'Couleurs inversées',
   },
   it: {
     _name: 'Italiano',
@@ -319,7 +339,12 @@ var I18N = {
     themeLabel: 'Aspetto',
     themeSystem: 'Sistema',
     themeLight: 'Chiaro',
-    themeDark: 'Scuro'
+    themeDark: 'Scuro',
+    themeHcDark: 'Contrasto elevato scuro',
+    themeHcLight: 'Contrasto elevato chiaro',
+    themeCvdDark: 'Daltonico scuro',
+    themeCvdLight: 'Daltonico chiaro',
+    themeInvert: 'Colori invertiti',
   },
   nl: {
     _name: 'Nederlands',
@@ -382,7 +407,12 @@ var I18N = {
     themeLabel: 'Weergave',
     themeSystem: 'Systeem',
     themeLight: 'Licht',
-    themeDark: 'Donker'
+    themeDark: 'Donker',
+    themeHcDark: 'Hoog contrast donker',
+    themeHcLight: 'Hoog contrast licht',
+    themeCvdDark: 'Kleurenblind donker',
+    themeCvdLight: 'Kleurenblind licht',
+    themeInvert: 'Omgekeerde kleuren',
   },
   pl: {
     _name: 'Polski',
@@ -445,7 +475,12 @@ var I18N = {
     themeLabel: 'Wygląd',
     themeSystem: 'Systemowy',
     themeLight: 'Jasny',
-    themeDark: 'Ciemny'
+    themeDark: 'Ciemny',
+    themeHcDark: 'Wysoki kontrast, ciemny',
+    themeHcLight: 'Wysoki kontrast, jasny',
+    themeCvdDark: 'Dla daltonistów, ciemny',
+    themeCvdLight: 'Dla daltonistów, jasny',
+    themeInvert: 'Odwrócone kolory',
   },
   pt: {
     _name: 'Português',
@@ -508,7 +543,12 @@ var I18N = {
     themeLabel: 'Aparência',
     themeSystem: 'Sistema',
     themeLight: 'Claro',
-    themeDark: 'Escuro'
+    themeDark: 'Escuro',
+    themeHcDark: 'Alto contraste escuro',
+    themeHcLight: 'Alto contraste claro',
+    themeCvdDark: 'Daltônico escuro',
+    themeCvdLight: 'Daltônico claro',
+    themeInvert: 'Cores invertidas',
   },
   tr: {
     _name: 'Türkçe',
@@ -571,7 +611,12 @@ var I18N = {
     themeLabel: 'Görünüm',
     themeSystem: 'Sistem',
     themeLight: 'Açık',
-    themeDark: 'Koyu'
+    themeDark: 'Koyu',
+    themeHcDark: 'Yüksek karşıtlık koyu',
+    themeHcLight: 'Yüksek karşıtlık açık',
+    themeCvdDark: 'Renk körü koyu',
+    themeCvdLight: 'Renk körü açık',
+    themeInvert: 'Ters renkler',
   },
   ru: {
     _name: 'Русский',
@@ -634,7 +679,12 @@ var I18N = {
     themeLabel: 'Оформление',
     themeSystem: 'Системная',
     themeLight: 'Светлая',
-    themeDark: 'Тёмная'
+    themeDark: 'Тёмная',
+    themeHcDark: 'Контрастная тёмная',
+    themeHcLight: 'Контрастная светлая',
+    themeCvdDark: 'Для дальтоников, тёмная',
+    themeCvdLight: 'Для дальтоников, светлая',
+    themeInvert: 'Инверсия цветов',
   },
   hi: {
     _name: 'हिन्दी',
@@ -697,7 +747,12 @@ var I18N = {
     themeLabel: 'थीम',
     themeSystem: 'सिस्टम',
     themeLight: 'हल्की',
-    themeDark: 'गहरी'
+    themeDark: 'गहरी',
+    themeHcDark: 'उच्च कंट्रास्ट गहरी',
+    themeHcLight: 'उच्च कंट्रास्ट हल्की',
+    themeCvdDark: 'रंगांधता-अनुकूल गहरी',
+    themeCvdLight: 'रंगांधता-अनुकूल हल्की',
+    themeInvert: 'उलटे रंग',
   },
   zh: {
     _name: '中文',
@@ -760,7 +815,12 @@ var I18N = {
     themeLabel: '外观',
     themeSystem: '跟随系统',
     themeLight: '浅色',
-    themeDark: '深色'
+    themeDark: '深色',
+    themeHcDark: '高对比度深色',
+    themeHcLight: '高对比度浅色',
+    themeCvdDark: '色盲友好深色',
+    themeCvdLight: '色盲友好浅色',
+    themeInvert: '反转颜色',
   },
   ja: {
     _name: '日本語',
@@ -823,7 +883,12 @@ var I18N = {
     themeLabel: '外観',
     themeSystem: 'システム',
     themeLight: 'ライト',
-    themeDark: 'ダーク'
+    themeDark: 'ダーク',
+    themeHcDark: 'ハイコントラスト（ダーク）',
+    themeHcLight: 'ハイコントラスト（ライト）',
+    themeCvdDark: '色覚サポート（ダーク）',
+    themeCvdLight: '色覚サポート（ライト）',
+    themeInvert: '色反転',
   },
   ko: {
     _name: '한국어',
@@ -886,7 +951,12 @@ var I18N = {
     themeLabel: '테마',
     themeSystem: '시스템',
     themeLight: '라이트',
-    themeDark: '다크'
+    themeDark: '다크',
+    themeHcDark: '고대비 다크',
+    themeHcLight: '고대비 라이트',
+    themeCvdDark: '색각 배려 다크',
+    themeCvdLight: '색각 배려 라이트',
+    themeInvert: '색상 반전',
   }
 };
 
