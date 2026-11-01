@@ -1,7 +1,7 @@
 /* shrinkling service worker — bump CACHE on every deploy so clients update cleanly */
 'use strict';
 
-var CACHE = 'shrinkling-v12';
+var CACHE = 'shrinkling-v13';
 var ASSETS = [
   './',
   './index.html',
