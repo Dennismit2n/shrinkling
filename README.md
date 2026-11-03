@@ -24,8 +24,6 @@ The whole app is a handful of static files. There is no server, no CDN, no cooki
 
 Because every image is re-encoded, all EXIF metadata (GPS position, camera model, capture time) is removed as a side effect — by design.
 
-*Analytics:* the app uses [GoatCounter](https://www.goatcounter.com) for anonymous, cookieless visit counting (disclosed in the footer). The script is vendored locally in `js/vendor/count.js`; the only external request is the count pixel. No personal data, no cookies, no cross-site tracking — and your images are never involved.
-
 ## Development
 
 No build step, no dependencies.
@@ -48,4 +46,4 @@ Interface strings live in [js/i18n.js](js/i18n.js). Some translations are machin
 
 ## License
 
-[MIT](LICENSE) for everything in this repository, with one exception: `js/vendor/count.js` is GoatCounter’s counter script and is released under the ISC license, as stated in its file header.
+[MIT](LICENSE) for everything in this repository.

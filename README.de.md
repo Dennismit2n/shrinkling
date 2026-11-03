@@ -24,8 +24,6 @@ Die ganze App besteht aus einer Handvoll statischer Dateien. Es gibt keinen Serv
 
 Weil jedes Bild neu kodiert wird, werden dabei alle EXIF-Metadaten (GPS-Position, Kameramodell, Aufnahmezeit) entfernt — mit Absicht.
 
-*Analytics:* Die App nutzt [GoatCounter](https://www.goatcounter.com) für anonyme Besucherzählung ohne Cookies (im Footer offengelegt). Das Skript liegt lokal in `js/vendor/count.js`; die einzige externe Anfrage ist das Zählpixel. Keine persönlichen Daten, keine Cookies, kein seitenübergreifendes Tracking — und deine Bilder sind nie beteiligt.
-
 ## Entwicklung
 
 Kein Build-Schritt, keine Abhängigkeiten.
@@ -48,4 +46,4 @@ Die Oberflächentexte liegen in [js/i18n.js](js/i18n.js). Einige Übersetzungen 
 
 ## Lizenz
 
-[MIT](LICENSE) für alles in diesem Repository, mit einer Ausnahme: `js/vendor/count.js` ist das Zählskript von GoatCounter und steht unter der ISC-Lizenz, wie im Kopf der Datei angegeben.
+[MIT](LICENSE) für alles in diesem Repository.
