@@ -4,25 +4,25 @@
 
 **➡️ Ausprobieren: [dennismit2n.github.io/shrinkling](https://dennismit2n.github.io/shrinkling/)** &nbsp;·&nbsp; 🇬🇧 [English version of this page](README.md)
 
-Fotos direkt im Browser verkleinern. Bilder hineinziehen, Ziel wählen („E-Mail — max. 2 MB", „Bewerbungsportal — max. 1 MB", …), fertige Dateien herunterladen. Kein Upload, kein Server, kein Konto — deine Fotos verlassen nie dein Gerät.
+Fotos direkt im Browser verkleinern. Bilder hineinziehen, Ziel wählen („E-Mail, max. 2 MB“, „Bewerbung / Portal, max. 1 MB“ …), fertige Dateien herunterladen. Kein Upload, kein Server, kein Konto: Deine Fotos verlassen nie dein Gerät.
 
 <img src="assets/screenshot-de.webp" alt="shrinkling: die Fläche zum Hineinziehen, Auswählen oder Einfügen von Bildern, darunter die vier Zielgrößen für E-Mail, Bewerbungsportale, Kleinanzeigen und das Web." width="640">
 
 ## Funktionen
 
-- 🎯 **Ein-Klick-Presets** — E-Mail (2 MB), Bewerbungsportale (1 MB), Kleinanzeigen (1920 px), Web (WebP) — plus freie Einstellungen für KB/MB, Pixel, Format und Qualität
-- 📦 **Stapelverarbeitung** — viele Fotos auf einmal hineinziehen, alle zusammen als ZIP herunterladen
-- 🕵️ **Metadaten entfernt** — GPS-Standort, Kameramodell und Aufnahmezeit werden automatisch gelöscht
-- 🖼️ **JPEG, PNG, WebP** — intelligente Zielgrößen-Suche; Warnung, bevor Transparenz verloren ginge (HEIC funktioniert in Safari; andere Browser zeigen einen freundlichen Hinweis)
-- 🌍 **14 Sprachen** — Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Português, Türkçe, Русский, हिन्दी, 中文, 日本語, 한국어 (automatisch erkannt)
-- 📱 **Installierbare PWA** — zum Startbildschirm hinzufügen; funktioniert komplett offline
-- 🔒 **Radikal privat** — alles passiert in deinem Browser
+- 🎯 **Ein-Klick-Presets:** E-Mail (2 MB), Bewerbung / Portal (1 MB), Kleinanzeigen (1920 px, 1 MB), Web (1920 px, WebP), dazu freie Einstellungen für KB/MB, Pixel, Format und Qualität
+- 📦 **Stapelverarbeitung:** viele Fotos auf einmal hineinziehen, alle zusammen als ZIP herunterladen
+- 🕵️ **Metadaten entfernt:** GPS-Standort, Kameramodell und Aufnahmezeit werden automatisch gelöscht
+- 🖼️ **JPEG, PNG, WebP:** intelligente Zielgrößen-Suche; Warnung, bevor Transparenz verloren ginge (HEIC funktioniert in Safari; andere Browser zeigen einen freundlichen Hinweis)
+- 🌍 **14 Sprachen:** Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Português, Türkçe, Русский, हिन्दी, 中文, 日本語, 한국어 (automatisch erkannt)
+- 📱 **Installierbare PWA:** zum Startbildschirm hinzufügen; funktioniert nach dem ersten Besuch auch offline
+- 🔒 **Radikal privat:** alles passiert in deinem Browser
 
 ## Datenschutz
 
-Die ganze App besteht aus einer Handvoll statischer Dateien. Es gibt keinen Server, kein CDN, keine Cookies, kein Konto. Bilder werden lokal per Canvas-API dekodiert, verkleinert und neu kodiert — schalte den Flugmodus ein, es funktioniert trotzdem. Glaub uns nicht einfach: Öffne die DevTools und beobachte den Netzwerk-Tab, oder lies den Quellcode; er liegt komplett hier.
+Die ganze App besteht aus einer Handvoll statischer Dateien. Es gibt keinen Server, kein CDN, keine Cookies, kein Konto. Bilder werden lokal per Canvas-API dekodiert, verkleinert und neu kodiert: Schalte den Flugmodus ein, es funktioniert trotzdem. Glaub mir nicht einfach: Öffne die DevTools und beobachte den Netzwerk-Tab, oder lies den Quellcode; er liegt komplett hier.
 
-Weil jedes Bild neu kodiert wird, werden dabei alle EXIF-Metadaten (GPS-Position, Kameramodell, Aufnahmezeit) entfernt — mit Absicht.
+Weil jedes Bild neu kodiert wird, werden dabei alle EXIF-Metadaten (GPS-Position, Kameramodell, Aufnahmezeit) entfernt, mit Absicht.
 
 ## Entwicklung
 
@@ -34,15 +34,15 @@ node tools/dev-server.js
 
 Dann http://localhost:8614 öffnen. Ändern, neu laden, fertig.
 
-**Beim Deploy:** die `CACHE`-Konstante in [sw.js](sw.js) hochzählen, damit installierte Clients die neue Version sofort bekommen. (Der Service Worker aktualisiert gecachte Dateien zusätzlich im Hintergrund — stale-while-revalidate —, ein vergessener Bump heilt sich also beim nächsten Besuch von selbst.)
+**Beim Deploy:** die `CACHE`-Konstante in [sw.js](sw.js) hochzählen, damit installierte Clients die neue Version sofort bekommen. (Der Service Worker aktualisiert gecachte Dateien zusätzlich im Hintergrund, stale-while-revalidate, ein vergessener Bump heilt sich also beim nächsten Besuch von selbst.)
 
 ## Übersetzungen
 
-Die Oberflächentexte liegen in [js/i18n.js](js/i18n.js). Einige Übersetzungen sind maschinell erstellt — wenn etwas in deiner Sprache seltsam klingt, freuen wir uns sehr über Korrekturen per Pull Request oder Issue!
+Die Oberflächentexte liegen in [js/i18n.js](js/i18n.js). Einige Übersetzungen sind maschinell erstellt. Wenn etwas in deiner Sprache seltsam klingt, nehme ich Korrekturen per Pull Request oder Issue gern an.
 
 ## Ideen für später
 
-- Zuschneiden (Profilbilder, Passbild-Maße) — wenn Nutzer danach fragen
+- Zuschneiden (Profilbilder, Passbild-Maße), wenn Nutzer danach fragen
 
 ## Lizenz
 
