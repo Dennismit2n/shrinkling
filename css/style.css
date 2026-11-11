@@ -749,4 +749,7 @@ main {
 }
 /* Hoher Kontrast kennt keine Schatten, der Beschlag bleibt. Gedruckt wird ohne beides. */
 :root[data-vision="contrast"] :is(.lang-wrap select, .install-btn, .panel, .preset, .btn, .result-row) { box-shadow: none; }
+@media print {
+  .lang-wrap select, .install-btn, .panel, .dropzone, .preset, .field input[type="number"], .field select, .btn, .result-row { background-image: none !important; box-shadow: none !important; }
+}
 /* Ende Beschlag */
