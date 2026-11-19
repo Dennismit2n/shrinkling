@@ -136,9 +136,9 @@ var I18N = {
     themeDark: 'Dark',
     themeHcDark: 'High contrast dark',
     themeHcLight: 'High contrast light',
-    themeCvdDark: 'Colour-blind dark',
-    themeCvdLight: 'Colour-blind light',
-    themeInvert: 'Inverted colours',
+    themeCvdDark: 'Color-blind dark',
+    themeCvdLight: 'Color-blind light',
+    themeInvert: 'Inverted colors',
   },
   es: {
     _name: 'Español',
